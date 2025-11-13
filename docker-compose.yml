@@ -1,0 +1,11 @@
+name: retos
+
+include:
+  - ./apps/docker-compose.dev.yml
+  - ./architecture/docker-compose.dev.yml
+  - ./devops/docker-compose.dev.yml
+
+networks:
+  retos-net:
+    name: retos-net
+    driver: bridge
