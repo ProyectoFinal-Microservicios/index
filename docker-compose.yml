@@ -1,11 +1,59 @@
-name: retos
+networks:
+  ms-net:
+    driver: bridge
+
+services:
+  # Este servicio no hace nada, solo sirve para invocar los demás.
+  # Para levantar el entorno de desarrollo:
+  # docker compose --profile dev up
+  #
+  # Para levantar el entorno de producción:
+  # docker compose --profile prod up
+
+  dev-runner:
+    image: alpine
+    container_name: dev
+    profiles: ["dev"]
+    depends_on:
+      - db
+      - auth
+      - profiles
+      - sms
+      - rabbitmq
+      - consul
+      - orchestrator
+      - api-gateway
+      - jenkins
+      - sonarqube
+      - sonar-db
+    command: "echo 'Entorno de desarrollo listo.'"
+
+  prod-runner:
+    image: alpine
+    container_name: prod
+    profiles: ["prod"]
+    depends_on:
+      - db
+      - auth
+      - profiles
+      - sms
+      - rabbitmq
+      - consul
+      - orchestrator
+      - api-gateway
+    command: "echo 'Entorno de producción listo.'"
 
 include:
-  - ./apps/docker-compose.dev.yml
-  - ./architecture/docker-compose.dev.yml
-  - ./devops/docker-compose.dev.yml
+  # Archivos para el perfil de desarrollo
+  - path: ./apps/docker-compose.dev.yml
+    profiles: ["dev"]
+  - path: ./architecture/docker-compose.dev.yml
+    profiles: ["dev"]
+  - path: ./devOps/docker-compose.dev.yml
+    profiles: ["dev"]
 
-networks:
-  retos-net:
-    name: retos-net
-    driver: bridge
+  # # Archivos para el perfil de producción
+  # - path: ./apps/docker-compose.prod.yml
+  #   profiles: ["prod"]
+  # - path: ./architecture/docker-compose.prod.yml
+  #   profiles: ["prod"]
