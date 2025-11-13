@@ -1,9 +1,0 @@
-[submodule "devOps"]
-	path = devOps
-	url = git@github.com:ProyectoFinal-Microservicios/devOps.git
-[submodule "apps"]
-	path = apps
-	url = git@github.com:ProyectoFinal-Microservicios/apps.git
-[submodule "architecture"]
-	path = architecture
-	url = git@github.com:ProyectoFinal-Microservicios/architecture.git
