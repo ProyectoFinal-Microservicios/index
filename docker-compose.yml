@@ -26,6 +26,12 @@ services:
       - jenkins
       - sonarqube
       - sonar-db
+      - prometheus
+      - alertmanager
+      - grafana
+      - loki
+      - promtail
+      - blackbox
     command: "echo 'Entorno de desarrollo listo.'"
 
   prod-runner:
@@ -41,6 +47,15 @@ services:
       - consul
       - orchestrator
       - api-gateway
+      - jenkins
+      - sonarqube
+      - sonar-db
+      - prometheus
+      - alertmanager
+      - grafana
+      - loki
+      - promtail
+      - blackbox
     command: "echo 'Entorno de producción listo.'"
 
 include:
